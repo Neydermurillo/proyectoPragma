@@ -41,7 +41,7 @@ public class UserRestController {
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if (user == null) {
-            response.put("mensaje", "El cliente ID:".concat(id.toString().concat(" no existe en la base de datos!")));
+            response.put("mensaje", "El usuario ID:".concat(id.toString().concat(" no existe en la base de datos!")));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.FOUND);
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -70,7 +70,7 @@ public class UserRestController {
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         response.put("mensaje", "El usuario ha sido creado con exito!");
-        response.put("ingreso usuario", userNew);
+        response.put("usuario", userNew);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
     @PutMapping("/users1/{id}")
