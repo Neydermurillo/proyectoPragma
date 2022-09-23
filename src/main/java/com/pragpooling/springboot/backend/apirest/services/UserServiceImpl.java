@@ -20,18 +20,22 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
+    @Transactional
     public User findById(Long id) {
         return userDao.findById(id).orElse(null);
     }
 
 
     @Override
+    @Transactional
     public User save(User user) {
-        return null;
+        return userDao.save(user);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
+        userDao.deleteById(id);
 
     }
 }

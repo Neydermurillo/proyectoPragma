@@ -21,12 +21,12 @@ public class UserRestController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/users1")
     public List<User> index() {
         return userService.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users1/{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
 
         User user = null;
@@ -47,7 +47,7 @@ public class UserRestController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    @PostMapping("/users")
+    @PostMapping("/users1")
     public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result) {
         User userNew = null;
         Map<String, Object> response = new HashMap<>();
@@ -70,10 +70,10 @@ public class UserRestController {
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         response.put("mensaje", "El usuario ha sido creado con exito!");
-        response.put("user", userNew);
+        response.put("ingreso usuario", userNew);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
-    @PutMapping("/users/{id}")
+    @PutMapping("/users1/{id}")
     public ResponseEntity<?>  Update(@Valid @RequestBody User user,BindingResult result, @PathVariable Long id){
 
         User currentUser = userService.findById(id);
@@ -117,7 +117,7 @@ public class UserRestController {
         return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/users1/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<?> delete(@PathVariable Long id){
         Map<String, Object> response = new HashMap<>();

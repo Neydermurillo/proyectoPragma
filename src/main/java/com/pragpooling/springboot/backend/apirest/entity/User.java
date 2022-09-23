@@ -1,12 +1,14 @@
 package com.pragpooling.springboot.backend.apirest.entity;
 
+
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 @Entity
-@Table(name = "users")
+@Table(name = "users1")
 public class User implements Serializable {
     private static final long serialVersionUID = -3252165509992082073L;
     @Id
@@ -20,9 +22,11 @@ public class User implements Serializable {
     @Size(min = 4, max = 12)
     @Column(nullable = false)
     private  String lastName;
+    @Size( max = 12)
+    @Column(nullable = false)
     private  String telephoneNumber;
     @NotEmpty
-    @Size(min = 4, max = 12)
+    @Size(min = 4, max = 20)
     @Column(nullable = false)
     private  String address;
     @NotEmpty
@@ -77,7 +81,7 @@ public class User implements Serializable {
         return email;
     }
 
-    public void setEmail(String Email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

@@ -1,0 +1,2 @@
+INSERT INTO USERS1 (first_name,last_name,telephone_number,address,email,password)VALUES('Manuel','Perez','23242211','Crr 23 #3C-21','manuel@yopmail.com','12d12')
+INSERT INTO USERS1 (first_name,last_name,telephone_number,address,email,password)VALUES('Andres','Perlaza','23242011','Crr 23 #3C-21','andres@yopmail.com','12d121')
