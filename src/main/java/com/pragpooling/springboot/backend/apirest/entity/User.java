@@ -5,6 +5,7 @@ package com.pragpooling.springboot.backend.apirest.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 @Entity
@@ -35,6 +36,9 @@ public class User implements Serializable {
     private  String email;
     @Size(min = 8, max = 15)
     @NotEmpty
+    @Column(nullable = false)
+    @Pattern(regexp = "(([A-Z-a-z-0-9-@#$%^&+=]))+", message="El passwor del usuario debe tener letras mayúsculas, minuscula, número y caracter")
+
     private  String password;
 
     public Long getId() {
