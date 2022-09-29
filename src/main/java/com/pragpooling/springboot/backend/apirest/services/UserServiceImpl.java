@@ -2,16 +2,20 @@ package com.pragpooling.springboot.backend.apirest.services;
 
 import com.pragpooling.springboot.backend.apirest.dao.IUserDao;
 import com.pragpooling.springboot.backend.apirest.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pragpooling.springboot.backend.apirest.exceptions.UserNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements IUserService{
 
-    @Autowired
-    private IUserDao userDao;
+    private Date s;
+    private final IUserDao userDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -22,7 +26,8 @@ public class UserServiceImpl implements IUserService{
     @Override
     @Transactional
     public User findById(Long id) {
-        return userDao.findById(id).orElse(null);
+        return userDao.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
 

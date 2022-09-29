@@ -1,8 +1,8 @@
 package com.pragpooling.springboot.backend.apirest.controllers;
 
 import com.pragpooling.springboot.backend.apirest.entity.User;
-import com.pragpooling.springboot.backend.apirest.services.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pragpooling.springboot.backend.apirest.services.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,35 +16,20 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class UserRestController {
-    @Autowired
-    private IUserService userService;
 
-    @GetMapping("/users1")
-    public List<User> index() {
+    private final UserServiceImpl userService;
+
+    @GetMapping
+    public List<User> getUsers() {
         return userService.findAll();
     }
 
-    @GetMapping("/users1/{id}")
-    public ResponseEntity<?> show(@PathVariable Long id) {
-
-        User user = null;
-        Map<String, Object> response = new HashMap<>();
-
-        try {
-            user = userService.findById(id);
-
-        } catch (DataAccessException e) {
-            response.put("mensaje", "Error al realizar la consulta en la base de datos");
-            response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        if (user == null) {
-            response.put("mensaje", "El usuario ID:".concat(id.toString().concat(" no existe en la base de datos!")));
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.FOUND);
-        }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
 
     @PostMapping("/users1")
